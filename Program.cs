@@ -324,6 +324,34 @@ namespace Heist
             {
                 member.PerformSkill(theBank);
             }
+
+            if(theBank.IsSecure()){
+                Console.WriteLine("Sorry, your crew failed the heist.");
+                Replay();
+            }
+
+            else{
+                Console.WriteLine("Congratulations! Your crew successfully pulled off the heist.");
+                Console.WriteLine("Here was everyone's take:");
+
+                int overallTake = theBank.CashOnHand;
+                int alreadyDist = 0;
+
+                foreach (IRobber member in crew)
+                {
+                    int take = (member.PercentageCut * theBank.CashOnHand) / 100;
+                    Console.WriteLine($"{member.Name}'s cut was ${take}");
+                    alreadyDist = alreadyDist + take;
+                }
+
+                int userTake = overallTake - alreadyDist;
+                Console.WriteLine($"After paying your crew, you stashed the remaining ${userTake} for yourself!");
+
+                Replay();
+            }
+
+
+
         }
 
         // ONCE GAME ENDS PROMPT PLAY AGAIN QUESTION
