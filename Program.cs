@@ -200,9 +200,14 @@ namespace Heist
                 }
 
                 if (robber.PercentageCut < maxCut && !crew.Contains(robber))
-                    Console.WriteLine(
-                        $"{index}. {robber.Name}({specialtyString}) Skill:{robber.SkillLevel} Cut:{robber.PercentageCut}%"
-                    );
+                    Console.WriteLine($"{index}. {robber.Name}({specialtyString}) Skill:{robber.SkillLevel} Cut:{robber.PercentageCut}%");
+
+                if (crew.Count == rolodex.Count){
+                    Console.WriteLine($"There are no more eligible candidates to recruit.");
+                    Console.WriteLine($"Press Enter and respond with N to attempt the heist!");
+                    Console.WriteLine();
+                    break;
+                }
 
                 index++;
             }
@@ -370,7 +375,6 @@ namespace Heist
             if (answer == "y")
             {
                 //RESET GLOBAL VARIABLES FROM PREVIOUS HEIST
-                // successfulHeists = 0;
                 crew = new List<IRobber>();
                 rolodex = new List<IRobber>()
                 {
